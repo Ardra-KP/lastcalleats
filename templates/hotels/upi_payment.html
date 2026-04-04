@@ -7,61 +7,62 @@
 
 <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
 
-    <div class="bg-white p-6 rounded-2xl shadow-xl max-w-md w-full text-center">
+```
+<div class="bg-white p-6 rounded-2xl shadow-xl max-w-md w-full text-center">
 
-        <!-- Title -->
-        <h2 class="text-2xl font-bold mb-2">
-            📱 UPI Payment
-        </h2>
+    <!-- Title -->
+    <h2 class="text-2xl font-bold mb-2">
+        📱 UPI Payment
+    </h2>
 
-        <p class="text-gray-500 mb-4">
-            Scan & Pay using any UPI app
-        </p>
+    <p class="text-gray-500 mb-4">
+        Scan & Pay using any UPI app
+    </p>
 
-        <!-- Amount -->
-        <div class="bg-green-50 text-green-700 font-bold text-xl py-2 rounded-lg mb-4">
-            ₹ {{ order.total_price }}
-        </div>
-
-        <!-- QR CODE -->
-        <div class="flex justify-center mb-4">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ upi_link }}"
-                 alt="QR Code"
-                 class="rounded-lg shadow">
-        </div>
-
-        <!-- UPI ID -->
-        <p class="text-sm text-gray-600 mb-2">
-            Pay to:
-        </p>
-
-        <p class="font-semibold text-lg text-purple-600 mb-4">
-            lastcalleats@upi
-        </p>
-
-        <!-- Pay Button -->
-        <a href="{{ upi_link }}"
-           class="block w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition mb-3">
-            Pay Now
-        </a>
-
-        <!-- Confirm Button -->
-        <button onclick="confirmPayment()"
-                class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition">
-            I Have Paid ✅
-        </button>
-
-        <!-- Loader Animation -->
-        <div id="loading" class="hidden mt-4">
-            <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-green-500 mx-auto"></div>
-            <p class="text-sm text-gray-500 mt-2">Verifying Payment...</p>
-        </div>
-
+    <!-- Amount -->
+    <div class="bg-green-50 text-green-700 font-bold text-xl py-2 rounded-lg mb-4">
+        ₹ {{ order.total_price }}
     </div>
+
+    <!-- QR CODE -->
+    <div class="flex justify-center mb-4">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ upi_link }}"
+             alt="QR Code"
+             class="rounded-lg shadow">
+    </div>
+
+    <!-- UPI ID -->
+    <p class="text-sm text-gray-600 mb-2">
+        Pay to:
+    </p>
+
+    <p class="font-semibold text-lg text-purple-600 mb-4">
+        lastcalleats@upi
+    </p>
+
+    <!-- Pay Button -->
+    <a href="{{ upi_link }}"
+       class="block w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition mb-3">
+        Pay Now
+    </a>
+
+    <!-- Confirm Button -->
+    <button onclick="confirmPayment()"
+            class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition">
+        I Have Paid ✅
+    </button>
+
+    <!-- Loader -->
+    <div id="loading" class="hidden mt-4">
+        <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-green-500 mx-auto"></div>
+        <p class="text-sm text-gray-500 mt-2">Verifying Payment...</p>
+    </div>
+
+</div>
+```
 
 </section>
 
-<!-- JS -->
 <script>
 function confirmPayment() {
     const loader = document.getElementById("loading");

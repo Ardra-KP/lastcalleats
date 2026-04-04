@@ -160,15 +160,11 @@ def upi_payment(request, order_id):
 def confirm_upi_payment(request, order_id):
     order = get_object_or_404(Order, id=order_id)
 
-    if not order.is_paid:
-        order.is_paid = True
-        order.save()
-
-    request.session['cart'] = {}
+    # You can mark order as paid (optional)
+    order.is_paid = True
+    order.save()
 
     return redirect('thank_you')
-
-
 # 🎉 THANK YOU PAGE
 def thank_you(request):
     return render(request, 'hotels/thank_you.html')
