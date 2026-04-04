@@ -5,6 +5,7 @@
 {% block content %}
 
 <!-- HERO SECTION -->
+
 <section style="margin-top:50px;">
     <div style="
         display:grid;
@@ -13,51 +14,54 @@
         align-items:center;
     ">
 
-        <!-- TEXT -->
-        <div>
-            <h1 style="
-                font-size:48px;
-                font-weight:700;
-                line-height:1.25;
-                margin-bottom:22px;
-                color:#111;
-            ">
-                Late-Night Food,<br>
-                Delivered Smart 🌙
-            </h1>
+```
+    <!-- TEXT -->
+    <div>
+        <h1 style="
+            font-size:48px;
+            font-weight:700;
+            line-height:1.25;
+            margin-bottom:22px;
+            color:#111;
+        ">
+            Late-Night Food,<br>
+            Delivered Smart 🌙
+        </h1>
 
-            <p style="
-                font-size:18px;
-                max-width:520px;
-                margin-bottom:36px;
-                color:#444;
-            ">
-                Discover nearby hotels selling fresh food at
-                <strong>up to 50% OFF</strong>
-                when the city sleeps.
-            </p>
+        <p style="
+            font-size:18px;
+            max-width:520px;
+            margin-bottom:36px;
+            color:#444;
+        ">
+            Discover nearby hotels selling fresh food at
+            <strong>up to 50% OFF</strong>
+            when the city sleeps.
+        </p>
 
-            <!-- IMPORTANT: Django URL -->
-            <a href="{% url 'hotel_list' %}" class="btn">
-                Browse Hotels →
-            </a>
-        </div>
-
-        <!-- IMAGE -->
-        <div>
-            <img src="{% static 'images/home.jpg' %}"
-                 alt="Late night food"
-                 style="
-                    width:100%;
-                    border-radius:22px;
-                    box-shadow:0 24px 60px rgba(0,0,0,0.2);
-                 ">
-        </div>
-
+        <a href="{% url 'hotel_list' %}" class="btn">
+            Browse Hotels →
+        </a>
     </div>
+
+    <!-- ✅ FIXED IMAGE -->
+    <div>
+        <img src="/media/foods/biriyani.jpeg"
+             alt="Late night food"
+             style="
+                width:100%;
+                border-radius:22px;
+                box-shadow:0 24px 60px rgba(0,0,0,0.2);
+             ">
+    </div>
+
+</div>
+```
+
 </section>
 
 <!-- FEATURES -->
+
 <section style="margin-top:130px;">
     <h2 style="
         text-align:center;
@@ -69,32 +73,36 @@
         Why Last Call Eats?
     </h2>
 
-    <div class="features-grid">
+```
+<div class="features-grid">
 
-        <div class="card">
-            <h3 style="margin-bottom:10px;">Late Open</h3>
-            <p>Available when others are closed.</p>
-        </div>
-
-        <div class="card">
-            <h3 style="margin-bottom:10px;">Trusted Hotels</h3>
-            <p>Verified kitchens only.</p>
-        </div>
-
-        <div class="card">
-            <h3 style="margin-bottom:10px;">Fast Pickup</h3>
-            <p>Quick & easy ordering.</p>
-        </div>
-
-        <div class="card">
-            <h3 style="margin-bottom:10px;">Zero Waste</h3>
-            <p>Save food, save money.</p>
-        </div>
-
+    <div class="card">
+        <h3 style="margin-bottom:10px;">Late Open</h3>
+        <p>Available when others are closed.</p>
     </div>
+
+    <div class="card">
+        <h3 style="margin-bottom:10px;">Trusted Hotels</h3>
+        <p>Verified kitchens only.</p>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-bottom:10px;">Fast Pickup</h3>
+        <p>Quick & easy ordering.</p>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-bottom:10px;">Zero Waste</h3>
+        <p>Save food, save money.</p>
+    </div>
+
+</div>
+```
+
 </section>
 
-<!-- RESPONSIVE (CLEAN & SAFE) -->
+<!-- RESPONSIVE -->
+
 <style>
 .features-grid {
     display: grid;
