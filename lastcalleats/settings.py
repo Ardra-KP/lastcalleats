@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # --------------------------------------------------
 SECRET_KEY = 'django-insecure-ohhyoel6j(k_$5d1w=$w24(&i1a)w@-udotiuw-quxhjbxf5-x'
 
-DEBUG =  False
+DEBUG =  True
 
 ALLOWED_HOSTS =  ['*']
 
@@ -141,7 +141,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # MEDIA FILES (VERY IMPORTANT FOR IMAGES)
 # --------------------------------------------------
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # --------------------------------------------------
