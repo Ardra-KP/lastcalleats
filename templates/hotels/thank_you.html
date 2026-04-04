@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Order Success{% endblock %}
+
+{% block content %}
+
+<section class="min-h-screen flex items-center justify-center bg-green-50 p-4">
+
+    <div class="bg-white p-8 rounded-2xl shadow-xl text-center max-w-md w-full">
+
+        <!-- Success Icon -->
+        <div class="text-6xl mb-4">✅</div>
+
+        <!-- Heading -->
+        <h2 class="text-2xl font-bold text-green-600 mb-2">
+            Order Placed Successfully!
+        </h2>
+
+        <!-- Message -->
+        <p class="text-gray-600 mb-4">
+            Your food is on the way 🚀  
+            Sit back and relax!
+        </p>
+
+        <!-- Payment Info -->
+        <div class="bg-gray-100 p-3 rounded-lg mb-4">
+            <p class="text-sm text-gray-500">Payment Method</p>
+            <p class="font-semibold">Cash on Delivery</p>
+        </div>
+
+        <!-- Buttons -->
+        <a href="{% url 'hotel_list' %}"
+           class="block bg-orange-500 text-white py-2 rounded-lg mb-2 hover:bg-orange-600 transition">
+            🍽 Order More Food
+        </a>
+
+        <a href="{% url 'cart_page' %}"
+           class="block bg-gray-200 py-2 rounded-lg hover:bg-gray-300 transition">
+            🛒 View Cart
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order {{ food.name }} | Last Call Eats{% endblock %}
+
+{% block content %}
+
+<section class="py-24 bg-gradient-to-b from-yellow-50 to-white">
+  <div class="container mx-auto px-6 max-w-4xl">
+
+    <!-- Card -->
+    <div class="bg-white rounded-3xl shadow-xl p-10
+                hover:shadow-2xl transition duration-300">
+
+      <!-- FOOD IMAGE -->
+      <img src="{{ food.image.url }}"
+           alt="{{ food.name }}"
+           class="w-full h-64 object-cover rounded-2xl mb-8">
+
+      <!-- Heading -->
+      <h1 class="text-3xl font-extrabold mb-2">
+        Order {{ food.name }}
+      </h1>
+      <p class="text-gray-600 mb-8">
+        Fresh food at closing time — save money & reduce waste.
+      </p>
+
+      <!-- Food Info -->
+      <div class="flex flex-col md:flex-row justify-between items-center
+                  bg-gray-50 rounded-2xl p-6 mb-10">
+
+        <div>
+          <h2 class="text-xl font-semibold">{{ food.name }}</h2>
+          <p class="text-gray-500 text-sm">
+            Available now · Limited quantity
+          </p>
+        </div>
+
+        <div class="mt-4 md:mt-0 text-right">
+          <p class="line-through text-gray-400">
+            ₹{{ food.original_price }}
+          </p>
+          <p class="text-2xl font-bold text-green-600">
+            ₹{{ food.discounted_price }}
+          </p>
+          <p class="text-sm text-green-600 font-medium">
+            50% OFF
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Order Form -->
+      <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <div>
+          <label class="block text-sm font-medium mb-1">
+            Your Name
+          </label>
+          <input
+            type="text"
+            name="customer_name"
+            required
+            placeholder="Enter your full name"
+            class="w-full px-4 py-3 rounded-xl border
+                   focus:outline-none focus:ring-2
+                   focus:ring-orange-400">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">
+            Quantity
+          </label>
+          <input
+            type="number"
+            name="quantity"
+            min="1"
+            value="1"
+            class="w-full px-4 py-3 rounded-xl border
+                   focus:outline-none focus:ring-2
+                   focus:ring-orange-400">
+        </div>
+
+        <!-- CTA -->
+        <button
+          type="submit"
+          class="w-full bg-orange-600 hover:bg-orange-700
+                 text-white font-semibold py-4 rounded-xl
+                 shadow-lg hover:shadow-2xl
+                 transition-all duration-300">
+          Confirm Order 🍽️
+        </button>
+      </form>
+
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}Contact | Last Call Eats{% endblock %}
+
+{% block content %}
+
+<!-- CONTACT HEADER -->
+<section style="
+    text-align:center;
+    padding:80px 0 50px;
+">
+    <h1 style="
+        font-size:40px;
+        font-weight:700;
+        margin-bottom:14px;
+    ">
+        Contact Us
+    </h1>
+
+    <p style="
+        font-size:18px;
+        max-width:600px;
+        margin:0 auto;
+    ">
+        We’re here for late-night cravings & hotel partnerships.
+    </p>
+</section>
+
+<!-- CONTACT CARD -->
+<section>
+    <div style="
+        max-width:900px;
+        margin:0 auto;
+    ">
+
+        <div class="card">
+
+            <div style="
+                display:grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap:30px;
+                text-align:center;
+            ">
+
+                <div>
+                    <div style="font-size:28px;margin-bottom:10px;">📧</div>
+                    <strong>Email</strong>
+                    <p style="margin-top:6px;">
+                        support@lastcalleats.com
+                    </p>
+                </div>
+
+                <div>
+                    <div style="font-size:28px;margin-bottom:10px;">📞</div>
+                    <strong>Phone</strong>
+                    <p style="margin-top:6px;">
+                        +91 98765 43210
+                    </p>
+                </div>
+
+                <div>
+                    <div style="font-size:28px;margin-bottom:10px;">⏰</div>
+                    <strong>Hours</strong>
+                    <p style="margin-top:6px;">
+                        6 PM – 4 AM
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- RESPONSIVE -->
+<style>
+@media (max-width: 800px) {
+    .card > div {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+    }
+}
+</style>
+
+{% endblock %}

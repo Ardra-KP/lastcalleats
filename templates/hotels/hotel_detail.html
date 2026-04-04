@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}{{ hotel.name }} | Last Call Eats{% endblock %}
+
+{% block content %}
+
+<!-- HOTEL HEADER -->
+<section class="bg-[#f3e8d2] py-12 text-center">
+    <h1 class="text-4xl font-bold">{{ hotel.name }}</h1>
+    <p class="text-gray-600 mt-2">
+        📍 {{ hotel.location }} | ⭐ {{ hotel.rating }}
+    </p>
+</section>
+
+
+<!-- FOOD GRID -->
+<section class="max-w-7xl mx-auto px-4 py-10">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+        {% for food in foods %}
+        <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition overflow-hidden group">
+
+            <!-- CLICKABLE AREA -->
+            <a href="{% url 'food_detail' food_id=food.id %}">
+                
+                <!-- IMAGE -->
+                <div class="relative">
+                    <img src="{{ food.image.url }}"
+                         class="w-full h-52 object-cover group-hover:scale-105 transition duration-300">
+
+                    <!-- DISCOUNT BADGE -->
+                    {% if food.badge_label %}
+                    <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        {{ food.badge_label }}
+                    </span>
+                    {% endif %}
+                </div>
+
+                <!-- FOOD INFO -->
+                <div class="p-5">
+                    <h3 class="text-xl font-bold mb-2">
+                        {{ food.name }}
+                    </h3>
+
+                    <p class="text-gray-500 text-sm mb-3">
+                        {{ food.description|truncatewords:10 }}
+                    </p>
+
+                    <!-- PRICE -->
+                    <div class="flex items-center gap-3">
+                        <span class="text-green-600 font-bold text-xl">
+                            ₹{{ food.discounted_price }}
+                        </span>
+                        <span class="line-through text-gray-400 text-sm">
+                            ₹{{ food.price }}
+                        </span>
+                    </div>
+
+                    <!-- AVAILABLE TIME -->
+                    <p class="text-orange-500 text-sm mt-2">
+                        ⏳ Available until {{ food.available_until|date:"H:i" }}
+                    </p>
+                </div>
+
+            </a>
+
+            <!-- 🔥 ORDER SECTION -->
+            <div class="px-5 pb-5 flex items-center justify-between gap-2">
+
+                <!-- Quantity -->
+                <input type="number" value="1" min="1"
+                       class="w-16 border rounded-lg px-2 py-1 text-center">
+
+                <!-- Order Button -->
+                <a href="{% url 'add_to_cart' food.id %}">
+                <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm">
+                  Add to Cart 🛒
+                </button>
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+        <p class="text-gray-500">
+            No rescue foods available.
+        </p>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

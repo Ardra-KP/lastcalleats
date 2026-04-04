@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Last Call Eats{% endblock %}</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+{% load static %}
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--yellow:#FFC107;
+--yellow-dark:#E0A800;
+--black:#111111;
+--text:#1f2937;
+--light-bg:#FFF8E1;
+--card-bg:#ffffff;
+}
+
+*{
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+margin:0;
+background:var(--light-bg);
+color:var(--text);
+line-height:1.65;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+background:var(--yellow);
+padding:16px 70px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 6px 18px rgba(0,0,0,0.12);
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+color:var(--black);
+letter-spacing:0.5px;
+}
+
+.logo span{
+color:#ff5722;
+}
+
+.nav-links{
+display:flex;
+align-items:center;
+}
+
+.nav-links a{
+margin-left:30px;
+text-decoration:none;
+color:var(--black);
+font-weight:500;
+position:relative;
+padding-bottom:6px;
+transition:color .25s ease;
+}
+
+.nav-links a::after{
+content:'';
+position:absolute;
+width:0;
+height:2px;
+background:var(--black);
+left:0;
+bottom:0;
+transition:width .25s ease;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+/* rescue button */
+
+.rescue-btn{
+margin-left:28px;
+background:#ff5722;
+color:white;
+padding:8px 16px;
+border-radius:20px;
+font-size:14px;
+font-weight:600;
+transition:.25s;
+}
+
+.rescue-btn:hover{
+background:#e64a19;
+transform:translateY(-1px);
+}
+
+/* ================= LAYOUT ================= */
+
+.container{
+width:92%;
+max-width:1200px;
+margin:70px auto;
+}
+
+/* ================= CARD ================= */
+
+.card{
+background:var(--card-bg);
+padding:36px;
+border-radius:16px;
+margin-bottom:40px;
+box-shadow:0 14px 40px rgba(0,0,0,0.08);
+transition:.3s;
+animation:fadeUp .6s ease;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 22px 55px rgba(0,0,0,0.14);
+}
+
+.card img{
+width:100%;
+border-radius:14px;
+margin-bottom:20px;
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(24px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* ================= BUTTON ================= */
+
+.btn{
+display:inline-block;
+padding:14px 30px;
+background:var(--yellow);
+color:var(--black);
+text-decoration:none;
+font-weight:600;
+border-radius:12px;
+transition:.25s;
+}
+
+.btn:hover{
+background:var(--yellow-dark);
+box-shadow:0 10px 26px rgba(0,0,0,0.18);
+transform:translateY(-2px);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+background:var(--black);
+color:#d1d5db;
+text-align:center;
+padding:40px 20px;
+margin-top:90px;
+font-size:14px;
+}
+
+footer strong{
+color:#fff;
+font-size:16px;
+}
+
+.footer-links{
+margin-top:12px;
+}
+
+.footer-links a{
+color:#9ca3af;
+margin:0 10px;
+text-decoration:none;
+font-size:13px;
+}
+
+.footer-links a:hover{
+color:white;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+nav{
+padding:14px 25px;
+}
+
+.nav-links a{
+margin-left:16px;
+font-size:14px;
+}
+
+.container{
+margin:50px auto;
+}
+
+}
+
+/* SPLASH SCREEN */
+
+#splash-screen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#FFC107;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.splash-content{
+text-align:center;
+animation:zoomIn 1.2s ease;
+}
+
+.splash-logo{
+font-size:48px;
+font-weight:700;
+color:#111;
+}
+
+.splash-logo span{
+color:#ff5722;
+}
+
+.splash-tag{
+margin-top:10px;
+font-size:16px;
+color:#333;
+}
+
+@keyframes zoomIn{
+0%{transform:scale(0.6);opacity:0;}
+100%{transform:scale(1);opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="splash-screen">
+
+<div class="splash-content">
+
+<div class="splash-logo">
+Last Call <span>Eats</span>
+</div>
+
+<div class="splash-tag">
+Late Night Food Deals 🌙
+</div>
+
+</div>
+
+</div>
+
+<!-- NAVBAR -->
+<nav>
+
+<div class="logo">
+Last Call <span>Eats</span>
+</div>
+
+<div class="nav-links">
+
+<a href="/">Home</a>
+
+<a href="/about/">About</a>
+
+<a href="/hotels/">Hotels</a>
+
+<a href="/contact/">Contact</a>
+
+<a href="{% url 'rescue_deals' %}" class="rescue-btn">
+🔥 Rescue Deals
+</a>
+
+</div>
+
+</nav>
+
+
+<div class="container">
+{% block content %}{% endblock %}
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<strong>Last Call Eats</strong><br>
+Late-Night Food, Delivered Smart 🌙
+
+<div class="footer-links">
+
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/hotels/">Hotels</a>
+<a href="/contact/">Contact</a>
+
+</div>
+
+<br>
+© 2026 All rights reserved
+
+</footer>
+<script>
+
+window.addEventListener("load", function(){
+
+// check if splash already shown
+if(sessionStorage.getItem("splashShown")){
+
+document.getElementById("splash-screen").style.display="none";
+
+}else{
+
+setTimeout(function(){
+
+document.getElementById("splash-screen").style.display="none";
+
+sessionStorage.setItem("splashShown", "true");
+
+},2000);
+
+}
+
+});
+
+</script>
+
+<!-- 🔥 DEAL COUNTDOWN SCRIPT -->
+
+<script>
+
+function updateCountdowns(){
+
+const timers = document.querySelectorAll(".countdown");
+
+timers.forEach(timer=>{
+
+const endTime = new Date(timer.dataset.time).getTime();
+const now = new Date().getTime();
+
+const distance = endTime-now;
+
+if(distance<=0){
+timer.innerHTML="Expired";
+return;
+}
+
+const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+const seconds=Math.floor((distance%(1000*60))/1000);
+
+timer.innerHTML=hours+"h "+minutes+"m "+seconds+"s";
+
+});
+
+}
+
+setInterval(updateCountdowns,1000);
+updateCountdowns();
+
+</script>
+
+
+</body>
+</html>

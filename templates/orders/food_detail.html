@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ food.name }} | Last Call Eats{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-yellow-50">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <div class="bg-white rounded-3xl shadow-xl overflow-hidden
+                grid grid-cols-1 md:grid-cols-2">
+
+      <!-- IMAGE -->
+      <img src="{{ food.image.url }}"
+           alt="{{ food.name }}"
+           class="w-full h-full object-cover">
+
+      <!-- DETAILS -->
+      <div class="p-10">
+        <h1 class="text-3xl font-extrabold mb-2">
+          {{ food.name }}
+        </h1>
+
+        <p class="text-gray-500 mb-4">
+          From {{ food.hotel.name }}
+        </p>
+
+        <div class="flex items-center gap-4 mb-6">
+          <p class="line-through text-gray-400 text-lg">
+            ₹{{ food.original_price }}
+          </p>
+          <p class="text-3xl font-bold text-green-600">
+            ₹{{ food.discounted_price }}
+          </p>
+          <span class="bg-green-100 text-green-700
+                       px-3 py-1 rounded-full text-sm font-semibold">
+            50% OFF
+          </span>
+        </div>
+
+        <p class="text-gray-600 mb-8">
+          Fresh food at closing time. Limited quantity available.
+          Order now and save money while reducing food waste.
+        </p>
+
+        <!-- ORDER BUTTON -->
+        <button onclick="showThankYou()"
+             class="inline-block bg-orange-600 hover:bg-orange-700
+            text-white font-semibold px-8 py-4 rounded-xl
+            shadow-lg transition">
+        Order Coming Soon 🍽️
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- THANK YOU POPUP -->
+<div id="thankPopup"
+     class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+
+  <div class="bg-white p-8 rounded-2xl shadow-xl text-center max-w-sm">
+
+    <h2 class="text-2xl font-bold mb-3">🎉 Thank You!</h2>
+
+    <p class="text-gray-600 mb-5">
+      Thank you for your interest in this rescue meal.
+      Ordering will be available soon on Last Call Eats.
+    </p>
+
+    <button onclick="closePopup()"
+            class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700">
+      Close
+    </button>
+
+  </div>
+</div>
+
+
+<script>
+
+function showThankYou(){
+  document.getElementById("thankPopup").classList.remove("hidden");
+  document.getElementById("thankPopup").classList.add("flex");
+}
+
+function closePopup(){
+  document.getElementById("thankPopup").classList.remove("flex");
+  document.getElementById("thankPopup").classList.add("hidden");
+}
+
+</script>
+
+{% endblock %}
