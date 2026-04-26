@@ -180,16 +180,10 @@ def thank_you(request, order_id):
 
 # 🔐 CREATE / RESET ADMIN (TEMPORARY - VERY IMPORTANT)
 def create_admin(request):
-    username = "admin"
-    password = "admin123"
-
-    user, created = User.objects.get_or_create(username=username)
-
-    user.set_password(password)   # 🔥 ALWAYS RESET PASSWORD
-    user.is_superuser = True
-    user.is_staff = True
-    user.is_active = True
-    user.email = "admin@gmail.com"
-    user.save()
-
-    return HttpResponse("✅ Admin ready → admin / admin123")
+    try:
+        user = User.objects.get(username="admin")
+        user.set_password("admin123")  # 🔥 reset password
+        user.save()
+        return HttpResponse("✅ Password reset → admin / admin123")
+    except User.DoesNotExist:
+        return HttpResponse("❌ Admin user not found")
