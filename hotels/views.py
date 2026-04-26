@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
+from django.contrib.auth.models import User
 from .models import Food, Hotel, Order
 
 
@@ -25,7 +27,9 @@ def hotel_list(request):
 # 🏨 HOTEL DETAIL
 def hotel_detail(request, hotel_id):
     hotel = get_object_or_404(Hotel, id=hotel_id)
-    foods = hotel.available_foods()
+
+    # 🔥 IMPORTANT FIX (ensures only rescue foods show)
+    foods = Food.objects.filter(hotel=hotel, is_rescue=True)
 
     return render(request, 'hotels/hotel_detail.html', {
         'hotel': hotel,
@@ -44,7 +48,7 @@ def food_detail(request, food_id):
 
 # 🔥 RESCUE DEALS
 def rescue_deals(request):
-    foods = Food.objects.select_related("hotel").all()
+    foods = Food.objects.select_related("hotel").filter(is_rescue=True)
 
     return render(request, "hotels/rescue_deals.html", {
         "foods": foods
@@ -87,11 +91,10 @@ def cart_page(request):
     })
 
 
-# 💳 CHECKOUT (FIXED)
+# 💳 CHECKOUT
 def checkout(request):
     cart = request.session.get('cart', {})
 
-    # 🚫 Prevent empty cart
     if not cart:
         return redirect('cart_page')
 
@@ -130,12 +133,12 @@ def checkout(request):
             is_paid=False
         )
 
-        # 💰 COD FLOW ✅ FIXED
+        # 💰 COD
         if payment_method == "COD":
             request.session['cart'] = {}
-            return redirect('thank_you')
+            return redirect('thank_you', order_id=order.id)
 
-        # 📱 UPI FLOW ✅ FIXED
+        # 📱 UPI
         elif payment_method == "UPI":
             return redirect('upi_payment', order_id=order.id)
 
@@ -144,7 +147,7 @@ def checkout(request):
     })
 
 
-# 📱 UPI PAYMENT PAGE
+# 📱 UPI PAYMENT
 def upi_payment(request, order_id):
     order = get_object_or_404(Order, id=order_id)
 
@@ -160,11 +163,28 @@ def upi_payment(request, order_id):
 def confirm_upi_payment(request, order_id):
     order = get_object_or_404(Order, id=order_id)
 
-    # You can mark order as paid (optional)
     order.is_paid = True
     order.save()
 
-    return redirect('thank_you')
-# 🎉 THANK YOU PAGE
-def thank_you(request):
-    return render(request, 'hotels/thank_you.html')
+    return redirect('thank_you', order_id=order.id)
+
+
+# 🎉 THANK YOU
+def thank_you(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+
+    return render(request, 'hotels/thank_you.html', {
+        'order': order
+    })
+
+
+# 🔐 CREATE ADMIN (TEMPORARY)
+def create_admin(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser(
+            username='admin',
+            email='admin@gmail.com',
+            password='admin123'
+        )
+        return HttpResponse("✅ Admin created")
+    return HttpResponse("⚠️ Admin already exists")
