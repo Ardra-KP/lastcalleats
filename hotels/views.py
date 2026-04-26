@@ -183,18 +183,13 @@ def create_admin(request):
     username = "admin"
     password = "admin123"
 
-    if User.objects.filter(username=username).exists():
-        user = User.objects.get(username=username)
-        user.set_password(password)
-        user.is_superuser = True
-        user.is_staff = True
-        user.save()
-        return HttpResponse("✅ Admin password reset → admin / admin123")
+    user, created = User.objects.get_or_create(username=username)
 
-    else:
-        User.objects.create_superuser(
-            username=username,
-            email="admin@gmail.com",
-            password=password
-        )
-        return HttpResponse("✅ Admin created → admin / admin123")
+    user.set_password(password)   # 🔥 ALWAYS RESET PASSWORD
+    user.is_superuser = True
+    user.is_staff = True
+    user.is_active = True
+    user.email = "admin@gmail.com"
+    user.save()
+
+    return HttpResponse("✅ Admin ready → admin / admin123")
