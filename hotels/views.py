@@ -28,7 +28,7 @@ def hotel_list(request):
 def hotel_detail(request, hotel_id):
     hotel = get_object_or_404(Hotel, id=hotel_id)
 
-    # 🔥 IMPORTANT FIX (ensures only rescue foods show)
+    # 🔥 Show only rescue foods
     foods = Food.objects.filter(hotel=hotel, is_rescue=True)
 
     return render(request, 'hotels/hotel_detail.html', {
@@ -178,13 +178,23 @@ def thank_you(request, order_id):
     })
 
 
-# 🔐 CREATE ADMIN (TEMPORARY)
+# 🔐 CREATE / RESET ADMIN (TEMPORARY - VERY IMPORTANT)
 def create_admin(request):
-    if not User.objects.filter(username='admin').exists():
+    username = "admin"
+    password = "admin123"
+
+    if User.objects.filter(username=username).exists():
+        user = User.objects.get(username=username)
+        user.set_password(password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
+        return HttpResponse("✅ Admin password reset → admin / admin123")
+
+    else:
         User.objects.create_superuser(
-            username='admin',
-            email='admin@gmail.com',
-            password='admin123'
+            username=username,
+            email="admin@gmail.com",
+            password=password
         )
-        return HttpResponse("✅ Admin created")
-    return HttpResponse("⚠️ Admin already exists")
+        return HttpResponse("✅ Admin created → admin / admin123")

@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
 
-    # 🔐 ADMIN (PUT THIS AT TOP)
+    # 🔐 MUST BE FIRST
     path('create-admin/', views.create_admin, name='create_admin'),
 
     # 🏠 Hotels
@@ -29,6 +29,6 @@ urlpatterns = [
     # 🎉 Success
     path('thank-you/<int:order_id>/', views.thank_you, name='thank_you'),
 
-    # 🏨 HOTEL DETAIL (⚠️ ALWAYS KEEP THIS LAST)
+    # ⚠️ KEEP LAST
     path('<int:hotel_id>/', views.hotel_detail, name='hotel_detail'),
 ]
