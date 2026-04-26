@@ -2,9 +2,12 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
+    # 🔐 ADMIN (PUT THIS AT TOP)
+    path('create-admin/', views.create_admin, name='create_admin'),
+
     # 🏠 Hotels
     path('', views.hotel_list, name='hotel_list'),
-    path('hotel/<int:hotel_id>/', views.hotel_detail, name='hotel_detail'),
 
     # 🍔 Food
     path('food/<int:food_id>/', views.food_detail, name='food_detail'),
@@ -19,13 +22,13 @@ urlpatterns = [
     # 💳 Checkout
     path('checkout/', views.checkout, name='checkout'),
 
-    # 📱 UPI Payment
+    # 📱 Payment
     path('upi-payment/<int:order_id>/', views.upi_payment, name='upi_payment'),
     path('confirm-payment/<int:order_id>/', views.confirm_upi_payment, name='confirm_upi_payment'),
 
-    # 🎉 Success Page
+    # 🎉 Success
     path('thank-you/<int:order_id>/', views.thank_you, name='thank_you'),
 
-    # 🔐 TEMP ADMIN CREATION (ADD THIS LINE)
-    path('create-admin/', views.create_admin, name='create_admin'),
+    # 🏨 HOTEL DETAIL (⚠️ ALWAYS KEEP THIS LAST)
+    path('<int:hotel_id>/', views.hotel_detail, name='hotel_detail'),
 ]
