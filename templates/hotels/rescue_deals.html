@@ -14,30 +14,37 @@
 {% for food in foods %}
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
 
-<img src="{{ food.image.url }}" class="w-full h-52 object-cover">
+{% if food.image %}
+    <img src="{{ food.image.url }}" class="w-full h-52 object-cover">
+{% else %}
+    <img src="/static/default-food.jpg" class="w-full h-52 object-cover">
+{% endif %}
 
 <div class="p-6">
 
-<h2 class="text-xl font-bold mb-2">
-{{ food.name }}
-</h2>
+<h2 class="text-xl font-bold mb-2">{{ food.name }}</h2>
 
 <p class="text-gray-500 text-sm mb-2">
 🏨 {{ food.hotel.name }}
 </p>
 
 <p class="text-red-500 font-semibold mb-3">
-🔥 Only 3 meals left
+{{ food.meals_left_label }}
 </p>
 
 <div class="flex justify-between items-center">
 
+<div>
 <span class="text-lg font-bold text-green-600">
+₹{{ food.discounted_price }}
+</span>
+<span class="line-through text-gray-400 text-sm">
 ₹{{ food.price }}
 </span>
+</div>
 
 <a href="{% url 'food_detail' food.id %}"
-class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">
+class="bg-orange-500 text-white px-4 py-2 rounded-lg">
 View Deal
 </a>
 
@@ -46,6 +53,8 @@ View Deal
 </div>
 </div>
 
+{% empty %}
+<p>No rescue deals available</p>
 {% endfor %}
 
 </div>

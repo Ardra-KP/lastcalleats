@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}UPI Payment{% endblock %}
+
+{% block content %}
+
+<div class="flex flex-col items-center justify-center py-16">
+
+    <h1 class="text-3xl font-bold mb-6">
+        💳 Complete Your Payment
+    </h1>
+
+    <p class="mb-4 text-gray-600">
+        Scan the QR code to pay ₹{{ order.total_price }}
+    </p>
+
+    <!-- QR CODE (Dummy Image) -->
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=lastcalleats@upi"
+         class="mb-6 border rounded-lg shadow">
+
+    <p class="text-sm text-gray-500 mb-6">
+        UPI ID: <strong>lastcalleats@upi</strong>
+    </p>
+
+    <!-- CONFIRM BUTTON -->
+    <a href="{% url 'confirm_upi_payment' order.id %}">
+        <button class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg text-lg">
+            ✅ I Have Paid
+        </button>
+    </a>
+
+</div>
+
+{% endblock %}

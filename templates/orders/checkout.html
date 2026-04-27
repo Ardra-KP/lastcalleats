@@ -9,77 +9,60 @@
         🧾 Checkout
     </h2>
 
+    {% if error %}
+    <p class="text-red-500 text-center mb-4">{{ error }}</p>
+    {% endif %}
+
     <form method="POST" class="bg-white p-6 rounded-xl shadow space-y-4">
         {% csrf_token %}
 
-        <!-- Name -->
         <input type="text" name="name" placeholder="Your Name"
                class="w-full border p-3 rounded-lg" required>
 
-        <!-- Phone -->
         <input type="text" name="phone" placeholder="Phone Number"
                class="w-full border p-3 rounded-lg" required>
 
-        <!-- Address -->
         <textarea name="address" placeholder="Delivery Address"
                   class="w-full border p-3 rounded-lg" required></textarea>
 
-        <!-- Payment Method -->
         <div>
             <label class="font-semibold block mb-2">
                 Select Payment Method:
             </label>
 
-            <div class="flex flex-col gap-2">
-                <label>
-                    <input type="radio" name="payment_method" value="COD" required onclick="hideUpi()">
-                    Cash on Delivery
-                </label>
+            <label>
+                <input type="radio" name="payment_method" value="COD" required onclick="hideUpi()">
+                Cash on Delivery
+            </label>
 
-                <label>
-                    <input type="radio" name="payment_method" value="UPI" onclick="showUpi()">
-                    UPI Payment
-                </label>
-            </div>
+            <label>
+                <input type="radio" name="payment_method" value="UPI" onclick="showUpi()">
+                UPI Payment
+            </label>
         </div>
 
-        <!-- ✅ UPI Section (Hidden initially) -->
         <div id="upi-section" class="hidden bg-gray-100 p-4 rounded-lg">
-            <p class="mb-2 font-semibold">Pay using UPI</p>
+            <p class="font-bold text-green-600">lastcalleats@upi</p>
 
-            <p class="text-sm text-gray-600">
-                Send payment to:
-            </p>
-
-            <p class="font-bold text-lg text-green-600">
-                lastcalleats@upi
-            </p>
-
-            <p class="text-sm mt-2">
-                (Dummy payment for demo)
-            </p>
-
-            <!-- Optional UPI ID input -->
-            <input type="text" name="upi_id" placeholder="Enter your UPI ID"
+            <input type="text" name="upi_id"
+                   placeholder="Enter your UPI ID"
                    class="w-full border p-2 rounded mt-3">
         </div>
 
-        <!-- Button -->
         <button type="submit"
-                class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition">
+                class="w-full bg-orange-500 text-white py-3 rounded-lg">
             Confirm Order
         </button>
+
     </form>
 
 </section>
 
-<!-- ✅ JS for toggle -->
 <script>
-function showUpi() {
+function showUpi(){
     document.getElementById("upi-section").classList.remove("hidden");
 }
-
-function hideUpi() {
+function hideUpi(){
     document.getElementById("upi-section").classList.add("hidden");
 }
 </script>

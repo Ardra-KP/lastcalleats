@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Thank You{% endblock %}
+
+{% block content %}
+
+<div class="text-center py-20">
+
+    <h1 class="text-4xl font-bold text-green-600 mb-4">
+        🎉 Order Successful!
+    </h1>
+
+    <p class="text-lg mb-3">
+        Thank you, {{ order.name }} 🙌
+    </p>
+
+    <p class="text-gray-600 mb-3">
+        Your order ID: <strong>#{{ order.id }}</strong>
+    </p>
+
+    <p class="text-gray-600 mb-6">
+        Payment Method: {{ order.payment_method }}
+    </p>
+
+    <a href="/" class="bg-orange-500 text-white px-6 py-3 rounded-lg">
+        Back to Home
+    </a>
+
+</div>
+
+{% endblock %}
