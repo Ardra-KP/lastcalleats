@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Hotel, Food, Order
 
+import qrcode
+import os
+from django.conf import settings
+
 
 # 🏠 HOME
 def home(request):
@@ -121,8 +125,21 @@ def checkout(request):
 def upi_payment(request, order_id):
     order = get_object_or_404(Order, id=order_id)
 
+    # 🔗 Create UPI payment link
+    upi_link = f"upi://pay?pa=lastcalleats@upi&pn=LastCallEats&am={order.total_price}&cu=INR"
+
+    # 🧾 Generate QR code
+    qr = qrcode.make(upi_link)
+
+    # 📁 Save QR image
+    file_name = f"qr_{order.id}.png"
+    file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+
+    qr.save(file_path)
+
     return render(request, 'orders/upi_payment.html', {
-        'order': order
+        'order': order,
+        'qr_code_url': settings.MEDIA_URL + file_name
     })
 
 def thank_you(request, order_id):
