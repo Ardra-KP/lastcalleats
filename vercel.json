@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "lastcalleats/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "lastcalleats/wsgi.py"
+    }
+  ]
+}
